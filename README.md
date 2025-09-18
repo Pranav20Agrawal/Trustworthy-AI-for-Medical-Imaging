@@ -3,7 +3,7 @@
 A novel, clinically-aware calibration framework to improve the reliability of AI models for brain tumor detection. This project transforms a high-accuracy "black box" model into a trustworthy clinical tool by making its confidence scores sensitive to the context of each individual medical scan.
 
 ![Project Banner](assets/banner.png)
-*A visual summary showing the initial miscalibrated model, our final calibrated output, and the intelligent triage application.*
+*A visual summary showing the initial miscalibrated model, my final calibrated output, and the intelligent triage application.*
 
 ---
 

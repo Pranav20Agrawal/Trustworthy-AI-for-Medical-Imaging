@@ -9,7 +9,7 @@ A novel, clinically-aware calibration framework to improve the reliability of AI
 
 ## 📚 Table of Contents
 - [The Problem: The "Trust Gap" in Medical AI](#the-problem-the-trust-gap-in-medical-ai)
-- [Our Novel Solution: A Clinically-Aware Framework](#our-novel-solution-a-clinically-aware-framework)
+- [My Novel Solution: A Clinically-Aware Framework](#my-novel-solution-a-clinically-aware-framework)
 - [🏗️ System Architecture](#️-system-architecture)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📊 Key Results](#-key-results)
@@ -23,28 +23,28 @@ A novel, clinically-aware calibration framework to improve the reliability of AI
 
 State-of-the-art deep learning models like YOLOv8 can detect brain tumors with over 97% accuracy. However, **high accuracy is not enough for safe clinical adoption.** These models are often poorly calibrated, meaning their confidence scores do not reflect the true probability of being correct. For example, a model might be 95% confident but correct only 75% of the time. This "trust gap" makes it dangerous to use these models for high-stakes decisions, like prioritizing patient scans.
 
-Our baseline evaluation of a standard YOLOv8s model confirmed this issue, revealing a high **Expected Calibration Error (ECE) of 0.199**, indicating significant overconfidence.
+My baseline evaluation of a standard YOLOv8s model confirmed this issue, revealing a high **Expected Calibration Error (ECE) of 0.199**, indicating significant overconfidence.
 
 ![Reliability Diagram Before Calibration](assets/reliability_diagram_BEFORE.png)
 *The initial reliability diagram of the baseline model, showing a clear gap between confidence (orange) and actual accuracy (blue), quantifying the "trust gap."*
 
 ---
 
-## Our Novel Solution: A Clinically-Aware Framework
+## My Novel Solution: A Clinically-Aware Framework
 
-This project introduces a multi-stage, context-aware calibration framework that addresses the research gaps in existing literature. Instead of using a "one-size-fits-all" correction, our engine dynamically adjusts the model's confidence based on clinically relevant factors.
+This project introduces a multi-stage, context-aware calibration framework that addresses the research gaps in existing literature. Instead of using a "one-size-fits-all" correction, my engine dynamically adjusts the model's confidence based on clinically relevant factors.
 
 ### Key Features & Contributions
 
 1.  **Image Quality Assessment Module:**
-    * We engineered a module to quantify the sharpness of every MRI scan using the **Variance of the Laplacian**, a fast and effective proxy for image quality. Our analysis provided definitive evidence that low image quality directly correlates with reduced model reliability, justifying a quality-aware approach.
+    * I engineered a module to quantify the sharpness of every MRI scan using the **Variance of the Laplacian**, a fast and effective proxy for image quality. My analysis provided definitive evidence that low image quality directly correlates with reduced model reliability, justifying a quality-aware approach.
 
 2.  **Context-Aware Calibration Engine:**
-    * **The Super-Hybrid Method (32 Groups):** Going beyond simple calibration, we performed a detailed error analysis and found that a model's reliability is affected by a combination of **image quality, tumor class, tumor size, and location**. We developed a fine-grained calibration strategy that learns a unique correction temperature for 32 distinct clinical contexts.
-    * **Dynamic Temperature Regression (DTR) - The Final Model:** Our most advanced contribution is a regression model (`GradientBoostingRegressor`) that *predicts* the optimal calibration temperature in real-time based on a continuous vector of clinical features. This moves beyond discrete groups to provide an infinitely granular and adaptive calibration, achieving the best performance.
+    * **The Super-Hybrid Method (32 Groups):** Going beyond simple calibration, I performed a detailed error analysis and found that a model's reliability is affected by a combination of **image quality, tumor class, tumor size, and location**. I developed a fine-grained calibration strategy that learns a unique correction temperature for 32 distinct clinical contexts.
+    * **Dynamic Temperature Regression (DTR) - The Final Model:** My most advanced contribution is a regression model (`GradientBoostingRegressor`) that *predicts* the optimal calibration temperature in real-time based on a continuous vector of clinical features. This moves beyond discrete groups to provide an infinitely granular and adaptive calibration, achieving the best performance.
 
 3.  **Model-Agnostic Validation:**
-    * We proved our calibration framework is a generalizable solution by applying it to a completely different architecture (**YOLOv5s**). The framework still achieved a significant **~30% improvement in reliability**, demonstrating its robustness.
+    * I proved my calibration framework is a generalizable solution by applying it to a completely different architecture (**YOLOv5s**). The framework still achieved a significant **~30% improvement in reliability**, demonstrating its robustness.
 
 4.  **Intelligent Triage System:**
     * A complete clinical triage application was developed and deployed using **Streamlit**. The application uses the trustworthy, calibrated confidence scores to automatically sort cases into three priority queues: **Red (Urgent)**, **Yellow (Standard)**, and **Green (Routine)**, simulating a real-world clinical workflow.
@@ -56,24 +56,23 @@ This project introduces a multi-stage, context-aware calibration framework that 
 The framework is designed as a modular, parallel-processing pipeline that transforms a raw MRI scan into a final, trustworthy clinical recommendation.
 
 ![System Architecture Diagram](assets/architecture.png)
-*The end-to-end workflow from image preprocessing and model selection to the parallel feature extraction and quality assessment, which converge at our novel Hybrid Calibration Engine.*
+*The end-to-end workflow from image preprocessing and model selection to the parallel feature extraction and quality assessment, which converge at my novel Hybrid Calibration Engine.*
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Backend & Core Logic:** Python, FastAPI, WebSockets
-- **AI / Machine Learning:** PyTorch, Ultralytics YOLOv8, Scikit-learn, Sentence Transformers
-- **Data Science & Processing:** Pandas, NumPy, OpenCV, Nibabel
-- **Database:** PostgreSQL, ChromaDB (Vector DB)
-- **Frontend & Deployment:** Streamlit, Next.js, React.js, Flutter
-- **DevOps & Tools:** Git, GitHub, VS Code, Google Colab Pro
+- **Core Development:** Python, Jupyter Notebook (via Google Colab Pro)
+- **AI & Machine Learning:** PyTorch, Ultralytics (YOLOv8), Scikit-learn
+- **Data Processing & Analysis:** Pandas, NumPy, OpenCV, Nibabel
+- **Data Visualization:** Matplotlib, Seaborn
+- **Frontend & Deployment:** Streamlit
 
 ---
 
 ## 📊 Key Results
 
-Our final **Dynamic Temperature Regression (DTR)** method delivered a statistically significant improvement in model reliability on an unseen test set.
+My final **Dynamic Temperature Regression (DTR)** method delivered a statistically significant improvement in model reliability on an unseen test set.
 
 ### **Over 50% Reduction in Calibration Error**
 
@@ -82,10 +81,10 @@ The framework successfully bridged the "trust gap" by making the model's confide
 | Method                    | Expected Calibration Error (ECE) | Improvement |
 | ------------------------- | -------------------------------- | ----------- |
 | Baseline (Uncalibrated)   | 0.199                            | -           |
-| **Our DTR Method (Final)**| **0.096** | **51.7%** |
+| **My DTR Method (Final)**| **0.096** | **51.7%** |
 
 ![Reliability Diagram After Calibration](assets/reliability_diagram_AFTER.png)
-*The final reliability diagram after applying our DTR calibration method. The gaps are visibly closed, and the model is now highly trustworthy.*
+*The final reliability diagram after applying my DTR calibration method. The gaps are visibly closed, and the model is now highly trustworthy.*
 
 ### Deployed Triage Application
 
